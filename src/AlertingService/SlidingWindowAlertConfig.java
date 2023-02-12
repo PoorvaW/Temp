@@ -2,7 +2,7 @@ package AlertingService;
 
 import DispatchService.DispatchStrategy;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /*
@@ -14,7 +14,7 @@ public class SlidingWindowAlertConfig implements AlertConfig {
     private String client;
     private String eventType;
     private List<DispatchStrategy> dispatchStrategyList;
-    private List<Long> eventTimestamps;
+    private LinkedList<Long> eventTimestamps;
 
     public SlidingWindowAlertConfig(int count, int windowSizeInSecs, String client, String eventType, List<DispatchStrategy> dispatchStrategyList) {
         this.count = count;
@@ -22,7 +22,7 @@ public class SlidingWindowAlertConfig implements AlertConfig {
         this.client = client;
         this.eventType = eventType;
         this.dispatchStrategyList = dispatchStrategyList;
-        this.eventTimestamps = new ArrayList<>();
+        this.eventTimestamps = new LinkedList<>();
     }
 
     @Override
@@ -48,17 +48,10 @@ public class SlidingWindowAlertConfig implements AlertConfig {
     }
 
     private boolean isThresholdBreached(long currentTime) {
-        int currCount = 0;
-        List<Long> toRemove = new ArrayList<>();
-
-        for (long timestamp : eventTimestamps) {
-            if ((currentTime - timestamp) < (windowSizeInSecs*1000)) {
-                currCount++;
-            } else {
-                toRemove.add(timestamp);
-            }
+        long lowerBound = currentTime - windowSizeInSecs * 1000;
+        while (!eventTimestamps.isEmpty() && eventTimestamps.peekFirst() < lowerBound) {
+            eventTimestamps.removeFirst();
         }
-        eventTimestamps.removeAll(toRemove);
-        return currCount>=count;
+        return eventTimestamps.size()>=count;
     }
 }
