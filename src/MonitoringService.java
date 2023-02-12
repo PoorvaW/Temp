@@ -3,6 +3,10 @@ import AlertingService.AlertConfig;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+MonitoringService maintains all the client configurations.
+Whenever an event occurs it is processed by invoking the appropriate method for the given configuration.
+ */
 public class MonitoringService {
     private static MonitoringService instance;
     private List<AlertConfig> clientConfigs;

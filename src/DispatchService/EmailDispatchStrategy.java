@@ -1,5 +1,8 @@
 package DispatchService;
 
+/*
+EmailDispatchStrategy implements the logic for dispatching an alert via Email.
+ */
 public class EmailDispatchStrategy implements DispatchStrategy{
     String subject;
 

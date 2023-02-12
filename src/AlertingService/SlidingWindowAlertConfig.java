@@ -1,10 +1,13 @@
 package AlertingService;
 
-import AlertingService.AlertConfig;
 import DispatchService.DispatchStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+SlidingWindowAlertConfig implements the logic for sliding window type alert.
+ */
 public class SlidingWindowAlertConfig implements AlertConfig {
     private int count;
     private int windowSizeInSecs;

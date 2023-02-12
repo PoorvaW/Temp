@@ -4,6 +4,9 @@ import DispatchService.DispatchStrategy;
 
 import java.util.List;
 
+/*
+SimpleCountAlertConfig implements the logic for a simple count type alert.
+ */
 public class SimpleCountAlertConfig implements AlertConfig {
     private int count;
     private String client;

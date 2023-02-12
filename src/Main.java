@@ -9,10 +9,15 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         try {
+            // Creating MonitoringService object
             MonitoringService monitoringService = MonitoringService.getInstance();
+
+            // Creating Tumbling Window Alert Config and testing by adding events
             AlertConfig xPaymentConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.TUMBLING_WINDOW, 4, "X", "PAYMENT_EXCEPTION", Arrays.asList(
                     new ConsoleDispatchStrategy("issue in payment"), new EmailDispatchStrategy("payment exception threshold breached")),10);
+
             monitoringService.addClientConfig(xPaymentConfig);
+
             monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
             monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
             monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
@@ -21,17 +26,20 @@ public class Main {
             monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
 
 
-
+            // Creating Sliding Window Alert Config and testing by adding events
             AlertConfig xUserServiceConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.SLIDING_WINDOW, 2, "X", "USER_SERVICE_EXCEPTION", Arrays.asList(
                     new ConsoleDispatchStrategy("issue in user service")), 2);
 
             monitoringService.addClientConfig(xUserServiceConfig);
+
             monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
             monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
             monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
             Thread.sleep(2000);
             monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
 
+
+            // Creating Simple Count Alert Config and testing by adding events
             AlertConfig xDataServiceConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.SIMPLE_COUNT,3,"X", "DATA_SERVICE_EXCEPTION", Arrays.asList(
                     new ConsoleDispatchStrategy("issue in data service")));
             monitoringService.addClientConfig(xDataServiceConfig);

@@ -1,6 +1,5 @@
 package AlertingService;
 
-import AlertingService.AlertConfig;
 import DispatchService.DispatchStrategy;
 
 import java.util.List;
@@ -8,6 +7,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/*
+SlidingWindowAlertConfig implements the logic for tumbling window type alert.
+ */
 public class TumblingWindowAlertConfig implements AlertConfig {
     private int count;
     private int windowSizeInSecs;
