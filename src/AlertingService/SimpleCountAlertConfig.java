@@ -1,6 +1,10 @@
+package AlertingService;
+
+import DispatchService.DispatchStrategy;
+
 import java.util.List;
 
-public class SimpleCountAlertConfig implements AlertConfig{
+public class SimpleCountAlertConfig implements AlertConfig {
     private int count;
     private String client;
     private String eventType;

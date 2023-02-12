@@ -1,6 +1,11 @@
+package AlertingService;
+
+import AlertingService.AlertConfig;
+import DispatchService.DispatchStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
-public class SlidingWindowAlertConfig implements AlertConfig{
+public class SlidingWindowAlertConfig implements AlertConfig {
     private int count;
     private int windowSizeInSecs;
     private String client;

@@ -1,3 +1,5 @@
+package DispatchService;
+
 public class EmailDispatchStrategy implements DispatchStrategy{
     String subject;
 

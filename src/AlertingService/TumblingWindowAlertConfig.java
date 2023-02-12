@@ -1,9 +1,14 @@
+package AlertingService;
+
+import AlertingService.AlertConfig;
+import DispatchService.DispatchStrategy;
+
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class TumblingWindowAlertConfig implements AlertConfig{
+public class TumblingWindowAlertConfig implements AlertConfig {
     private int count;
     private int windowSizeInSecs;
     private String client;

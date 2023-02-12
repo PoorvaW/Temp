@@ -1,5 +1,7 @@
-import java.util.List;
+package AlertingService;
+import DispatchService.DispatchStrategy;
 
+import java.util.List;
 public class AlertConfigFactory {
     public static AlertConfig getAlertConfig(AlertConfigType type, int count, String client, String eventType, List<DispatchStrategy> dispatchStrategyList, Integer... windowSizeInSecs){
         Integer windowSize = windowSizeInSecs.length > 0 ? windowSizeInSecs[0] : 0;

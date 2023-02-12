@@ -1,3 +1,5 @@
+package DispatchService;
+
 public class ConsoleDispatchStrategy implements DispatchStrategy{
     String message;
     public ConsoleDispatchStrategy(String message){

@@ -1,3 +1,8 @@
+import AlertingService.AlertConfig;
+import AlertingService.AlertConfigFactory;
+import AlertingService.AlertConfigType;
+import DispatchService.ConsoleDispatchStrategy;
+
 import java.util.Arrays;
 
 public class Main {

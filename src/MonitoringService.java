@@ -1,3 +1,5 @@
+import AlertingService.AlertConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,6 @@ public class MonitoringService {
     {
         if (instance == null)
         {
-            // if instance is null, initialize
             instance = new MonitoringService();
         }
         return instance;
