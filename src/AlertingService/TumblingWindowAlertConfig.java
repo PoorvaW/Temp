@@ -43,7 +43,7 @@ public class TumblingWindowAlertConfig implements AlertConfig {
     public void processEvent() {
         currCount++;
         if(isThresholdBreached()){
-            System.out.println("[INFO] MonitoringService: " +client+" "+eventType+"threshold breached");
+            System.out.println("[INFO] MonitoringService: " +client+" "+eventType+" threshold breached");
             for(DispatchStrategy ds: dispatchStrategyList){
                 ds.dispatchAlert();
             }

@@ -2,6 +2,7 @@ import AlertingService.AlertConfig;
 import AlertingService.AlertConfigFactory;
 import AlertingService.AlertConfigType;
 import DispatchService.ConsoleDispatchStrategy;
+import DispatchService.EmailDispatchStrategy;
 
 import java.util.Arrays;
 
@@ -9,31 +10,35 @@ public class Main {
     public static void main(String[] args) {
         try {
             MonitoringService monitoringService = MonitoringService.getInstance();
-            AlertConfig simpleCountAlertConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.SIMPLE_COUNT, 3, "abc", "abc", Arrays.asList(
-                    new ConsoleDispatchStrategy("issue in user service")));
-            monitoringService.addClientConfig(simpleCountAlertConfig);
-            monitoringService.processEvent("abc", "abc");
-            monitoringService.processEvent("abc", "abc");
-            monitoringService.processEvent("abc", "abc");
-            monitoringService.processEvent("abc", "abc");
+            AlertConfig xPaymentConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.TUMBLING_WINDOW, 4, "X", "PAYMENT_EXCEPTION", Arrays.asList(
+                    new ConsoleDispatchStrategy("issue in payment"), new EmailDispatchStrategy("payment exception threshold breached")),10);
+            monitoringService.addClientConfig(xPaymentConfig);
+            monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
+            monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
+            monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
+            monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
+            Thread.sleep(10000);
+            monitoringService.processEvent("X", "PAYMENT_EXCEPTION");
 
-            AlertConfig slidingWindowAlertConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.SLIDING_WINDOW, 2, "pqr", "pqr", Arrays.asList(
-                    new ConsoleDispatchStrategy("issue in user service")), 1);
 
-            monitoringService.addClientConfig(slidingWindowAlertConfig);
-            monitoringService.processEvent("pqr", "pqr");
-            monitoringService.processEvent("pqr", "pqr");
-            monitoringService.processEvent("pqr", "pqr");
+
+            AlertConfig xUserServiceConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.SLIDING_WINDOW, 2, "X", "USER_SERVICE_EXCEPTION", Arrays.asList(
+                    new ConsoleDispatchStrategy("issue in user service")), 2);
+
+            monitoringService.addClientConfig(xUserServiceConfig);
+            monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
+            monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
+            monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
             Thread.sleep(2000);
-            monitoringService.processEvent("pqr", "pqr");
+            monitoringService.processEvent("X", "USER_SERVICE_EXCEPTION");
 
-            AlertConfig tumblingWindowAlertConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.TUMBLING_WINDOW,2,"xyz", "xyz", Arrays.asList(new ConsoleDispatchStrategy("incorrect")),5);
-            monitoringService.addClientConfig(tumblingWindowAlertConfig);
-            monitoringService.processEvent("xyz","xyz");
-            monitoringService.processEvent("xyz","xyz");
-            monitoringService.processEvent("xyz","xyz");
-            Thread.sleep(5000);
-            monitoringService.processEvent("xyz","xyz");
+            AlertConfig xDataServiceConfig = AlertConfigFactory.getAlertConfig(AlertConfigType.SIMPLE_COUNT,3,"X", "DATA_SERVICE_EXCEPTION", Arrays.asList(
+                    new ConsoleDispatchStrategy("issue in data service")));
+            monitoringService.addClientConfig(xDataServiceConfig);
+            monitoringService.processEvent("X","DATA_SERVICE_EXCEPTION");
+            monitoringService.processEvent("X","DATA_SERVICE_EXCEPTION");
+            monitoringService.processEvent("X","DATA_SERVICE_EXCEPTION");
+            monitoringService.processEvent("X","DATA_SERVICE_EXCEPTION");
 
 
         } catch (Exception e){
